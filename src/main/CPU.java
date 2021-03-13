@@ -1,5 +1,6 @@
 package main;
 
 public class CPU {
-	"asdfasdf";
+	
+	System.asdfasdfasdfasdf
 }
