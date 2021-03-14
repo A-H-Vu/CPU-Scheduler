@@ -1,11 +1,10 @@
 package main;
 
 /*
- * Teng Zhang
- * SJF (Nonpreemptive shortest-Job-First Scheduling)
+ * SJF (Non-Preemptive shortest-Job-First Scheduling)
  */
 
-public class SJF {
+public class SJF() {
 
 
 }
