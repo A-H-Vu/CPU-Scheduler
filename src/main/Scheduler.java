@@ -3,22 +3,23 @@ package main;
 import java.util.Scanner;
 
 public class Scheduler {
+	//create new scanner
 	static Scanner s = new Scanner(System.in);
-	static Process[] processOriginal;
+
+	//number of process
+	static int processnumber;
 	
 	public static void main(String[] args) {
 		//program start, print welcome message
 		printWelcome();
-		int number = s.nextInt();
-		//create process list based on input number (length)
-		processOriginal = new Process[number];
-		
-		//create different process
-		randomProcess(number);
+		processnumber = s.nextInt();
+
 		
 		//print all the algorithm, then select One of the Algorithm and use it 
 		printSelection();
-		int SdSelection = s.nextInt();
+		int SdSelection = s.nextInt();	
+	
+		//create different process and run
 		selectAlgorithem(SdSelection);
 		
 		s.close();
@@ -31,7 +32,10 @@ public class Scheduler {
 			//FCFS
 			break;
 		case 2:
-			//SJF (NonPreemptive)
+			//create the SJF, create process and print result
+			SJF sjf = new SJF(processnumber);
+			sjf.println();
+		
 			break;
 		case 3:
 			//SJF (Preemptive)
@@ -48,19 +52,9 @@ public class Scheduler {
 		default:
 			System.out.println("Not program choied to execute!");
 			break;
-	}
-	}
-	
-	//create random process with id, burst, arrival and priority
-	private static void randomProcess(int number) {
-		for(int i = 0; i < number; i++) {
-			int brust = (int)(Math.random() * 60 + 1);
-			int arrival = (int)(Math.random() * 9 + 1);
-			int priority = (int)(Math.random() * 9 + 1);
-			processOriginal[i] = new Process(i, brust, arrival, priority);
-			processOriginal[i].printLine();
 		}
 	}
+
 
 	//print welcome message
 	private static void printWelcome() {
