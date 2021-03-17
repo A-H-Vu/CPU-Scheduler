@@ -34,7 +34,6 @@ public class Scheduler {
 		case 2:
 			//create the SJF, create process and print result
 			SJF sjf = new SJF(processnumber);
-			sjf.println();
 		
 			break;
 		case 3:

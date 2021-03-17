@@ -13,6 +13,7 @@ public class Process {
 	private int finishTime;
 	private int waitTime;
 	private int ioWairTime;
+	private int turnAroundTime;
 
 	public Process(int pid, int[] CPUBurstList) {
 		this.pid = pid;
@@ -27,6 +28,10 @@ public class Process {
 		this.priority = priority;
 		this.CPUBurstList = CPUBurstList;
 		this.IOBurstList = IOBurstList;
+	}
+	
+	public void calTurnAroundTime() {
+		turnAroundTime = finishTime - startTime;
 	}
 
 	public int getPid() {
@@ -101,6 +106,14 @@ public class Process {
 		this.ioWairTime = ioWairTime;
 	}
 
+	public int getTurnAroundTime() {
+		return turnAroundTime;
+	}
 
+	public void setTurnAroundTime(int turnAroundTime) {
+		this.turnAroundTime = turnAroundTime;
+	}
+
+	
 	
 }
