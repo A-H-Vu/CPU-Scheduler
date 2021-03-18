@@ -1,73 +1,109 @@
-package EECS2011;
+package main;
 
 import java.util.*;
-import java.lang.Math;
+import java.util.Scanner;
 
-public class NonPreemptivePriority {
+public class NonpreemptivePriority {
+	private static Process[]process;
+	private int processnumber;
+	private int totalWaitTime;
+	private int totalTurnaroundTime;
+	
+	public NonpreemptivePriority(int n) {
+		process = new Process[n];
+		createNonpreemptivePriority(n);
+		processnumber = n;
+    NonpreemptivePriorityProcess();
+	}
+	
+	private void NonpreemptivePriorityProcess() {
+		waitTime();
+		finishTime();
+		println();
+		System.out.println("===============After NonpreemptivePriority Sort===============");
+		setNonpreemptivePriority();
+		waitTime();
+		finishTime();
+		println();
+	}
+	
+	private static void createNonpreemptivePriority(int num) {
+		for (int i = 0; i < num; i++) {
+			int[] bArray = { (int) (Math.random() * 60 + 1) };
+			process[i] = new Process(i, bArray);
+		}
+	}
+	
+	public void setNonpreemptivePriority() {
+		int[]priority = null;
+		int length = process.length;
+		System.out.println("");
+		System.out.println("Enter the priority for process");
+		Scanner scan=new Scanner(System.in);
+		for(int i=0;i<length;i++) {
+			priority[i]=scan.nextInt();
+		}
+		scan.close();
+		
+		Process[]temp = process;
+		int t=priority[0];
+		for(int k=0;k<length;k++) {
+			for(int j=0;j<length;j++) {
+				if(temp[k]==temp[t]) {
+					process[k]=temp[k];
+				}
+				else {
+					t=priority[j];
+				}
+			}
+		}
+		
+	}
+	
+	private void waitTime() {
+		int temp;
+		totalWaitTime = 0;
+		for (int i = 0; i < processnumber; i++) {
+			temp = 0;
+			if(i != 0) {
+				for (int j = i-1; j >= 0; j--) {
+					temp += process[j].getCPUBurstList()[0];		
+				}
+			}
+			process[i].setWaitTime(temp);
+			totalWaitTime += temp;
+		}
+	}
+	
+	private void finishTime() {
+		int temp;
+		totalTurnaroundTime = 0;
+		for (int i = 0; i < processnumber; i++) {
+			temp = 0;
+			for (int j = i; j >= 0; j--) {
+				temp += process[j].getCPUBurstList()[0];
+			}
+			process[i].setFinishTime(temp);
+			int turnAroundT = temp - process[i].getStartTime();
+			process[i].setTurnAroundTime(turnAroundT);
+			totalTurnaroundTime += turnAroundT;
+		}
+	}
+	
+	public void println() {
+		for (int i = 0; i < processnumber; i++) {
+			System.out.println("ID: " + process[i].getPid() + 
+					" Brust: " + process[i].getCPUBurstList()[0] + 
+					" WaitTime: " + process[i].getWaitTime() +
+					" TurnAroundTime: " + 
+					(process[i].getFinishTime() - process[i].getStartTime())
+					);
+		}
+		
+		double s = ((double)totalWaitTime) / (double)processnumber ;
+		double t = ((double)totalTurnaroundTime) / (double)processnumber;
+		System.out.printf("Average waiting time = %f \n", s); 
+        System.out.printf("Average turn around time = %f \n", t); 
+	}
 
-    static Comparator<Process> cmp1 = Comparator.comparingInt(o -> o.return_time);
-
-    static Comparator<Process> cmp2 = Comparator.comparingInt(o -> o.priority);
-
-    public static void schedule(LinkedList<Process> processes, int num_IO) {
-        PriorityQueue<Process> waitingProcessQueue = new PriorityQueue<>(cmp1);
-        PriorityQueue<Process> readyProcessQueue = new PriorityQueue<>(cmp2);
-        LinkedList<Process> terminatedProcessQueue = new LinkedList<>();
-        int[] IOFinishTime = new int[num_IO];
-        Arrays.fill(IOFinishTime, 0);
-        waitingProcessQueue.addAll(processes);
-        if (Debug.Debug)
-            for (Process p : processes) {
-                System.out.println("process " + p.pid + " arrive at " + p.arrive_time);
-            }
-
-        int timeNow = 0;
-        while (!waitingProcessQueue.isEmpty() || !readyProcessQueue.isEmpty()) {
-            if (Debug.Debug) System.out.println("time now: " + timeNow);
-            while (!waitingProcessQueue.isEmpty() && waitingProcessQueue.peek().return_time <= timeNow) {
-                if (Debug.Debug) System.out.println("process " + waitingProcessQueue.peek().pid + " enter ready queue");
-                readyProcessQueue.add(waitingProcessQueue.poll());
-            }
-            if (Debug.Debug) System.out.println("enter finished");
-            if (readyProcessQueue.isEmpty() && !waitingProcessQueue.isEmpty()) {  // ReadyQueue is empty, so we need to move time to the next return process
-                timeNow = waitingProcessQueue.peek().return_time;
-                continue;
-            }
-            Process curProcess = readyProcessQueue.poll();  //from ready_queue to running
-            assert curProcess != null;
-            curProcess.wait_time += timeNow - curProcess.return_time;  //cal Waiting time
-            if (curProcess.isFinished()) {  // already finished, correct the wait time
-                curProcess.wait_time -= timeNow - curProcess.return_time;
-                curProcess.terminate_time = curProcess.return_time;
-                terminatedProcessQueue.add(curProcess);
-                if (Debug.Debug) System.out.println("process " + curProcess.pid + " terminated");
-                continue;
-            }
-
-            timeNow += curProcess.getNextBurstTime();
-            if (Debug.Debug) System.out.println("process " + curProcess.pid + " runs for " + curProcess.getNextBurstTime());
-            int ioId = curProcess.getNextIOId();
-            int ioTime = curProcess.getNextIOTime();
-            if (ioTime != -1) {
-                IOFinishTime[ioId] = Math.max(IOFinishTime[ioId], timeNow) + ioTime;
-                //here if IOFinishTime is larger, we have to wait, else we just execute io
-                curProcess.return_time = IOFinishTime[ioId]; // when then process finished its io, it return to the ready queue
-            } else {
-                curProcess.return_time = timeNow;
-            }
-            if (Debug.Debug) System.out.println("process " + curProcess.pid + " next run at " + curProcess.return_time);
-            curProcess.moveToNextRequirement();
-            waitingProcessQueue.add(curProcess);
-        }
-
-        int waiting_time = 0, turnaround_time = 0;
-        for (Process p : terminatedProcessQueue) {
-            waiting_time += p.wait_time;
-            turnaround_time += p.terminate_time - p.arrive_time;
-            if (Debug.Debug) System.out.println("pid: " + p.pid +" wait time:" + p.wait_time + " turnaround time: " + (p.terminate_time-p.arrive_time));
-        }
-        System.out.println("Scheduling algorithm: Nonpreemptive Priority Scheduling");
-        System.out.println("average waiting time: " + (double)waiting_time / terminatedProcessQueue.size());
-        System.out.println("average turnaround time: " + (double)turnaround_time / terminatedProcessQueue.size());
-    }
 }
