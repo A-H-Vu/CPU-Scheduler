@@ -1,4 +1,4 @@
-package EECS2011;
+package main;
 
 import java.util.*;
 import java.lang.Math;

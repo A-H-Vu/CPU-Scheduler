@@ -1,4 +1,4 @@
-package EECS2011;
+package main;
 
 public class Debug {
     static final boolean Debug = false;
