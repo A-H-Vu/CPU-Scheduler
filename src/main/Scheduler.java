@@ -54,6 +54,7 @@ public class Scheduler {
 		switch(SdSelection) {
 		case 1:
 			//FCFS
+			FCFS fcfs = new FCFS(processnumber);
 			break;
 		case 2:
 			//create the SJF, create process and print result

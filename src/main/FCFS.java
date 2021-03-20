@@ -23,6 +23,7 @@ public class FCFS {
 
 	
 	private void FCFSProcess() {
+		System.out.println("=================Using FCFS(NP)=================");
 		waitTime();
 		finishTime();
 		println();

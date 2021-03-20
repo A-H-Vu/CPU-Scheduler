@@ -1,0 +1,13 @@
+=================Using FCFS(NP)=================
+ID: 0 Brust: 49 WaitTime: 0 TurnAroundTime: 49
+ID: 1 Brust: 18 WaitTime: 49 TurnAroundTime: 67
+ID: 2 Brust: 36 WaitTime: 67 TurnAroundTime: 103
+ID: 3 Brust: 32 WaitTime: 103 TurnAroundTime: 135
+ID: 4 Brust: 20 WaitTime: 135 TurnAroundTime: 155
+ID: 5 Brust: 38 WaitTime: 155 TurnAroundTime: 193
+ID: 6 Brust: 28 WaitTime: 193 TurnAroundTime: 221
+ID: 7 Brust: 55 WaitTime: 221 TurnAroundTime: 276
+ID: 8 Brust: 14 WaitTime: 276 TurnAroundTime: 290
+ID: 9 Brust: 50 WaitTime: 290 TurnAroundTime: 340
+Average waiting time = 148.900000 
+Average turn around time = 182.900000 
