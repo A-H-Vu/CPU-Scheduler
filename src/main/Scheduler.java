@@ -34,7 +34,7 @@ public class Scheduler {
 		while(!finish) {
 		    try{
 		    	SdSelection = Integer.parseInt(s.nextLine());
-		    	if(SdSelection <= 0 || processnumber > 6)
+		    	if(SdSelection <= 0 || SdSelection > 6)
 		    		throw new NumberFormatException() ;
 		    	finish = true;
 		    }catch (NumberFormatException e){
@@ -42,10 +42,11 @@ public class Scheduler {
 		    }
 		}
 		
+		s.close();
 		
 		//create different process and run
 		selectAlgorithem(SdSelection);	
-		s.close();
+
 	
 	}
 	
@@ -56,8 +57,7 @@ public class Scheduler {
 			break;
 		case 2:
 			//create the SJF, create process and print result
-			SJF sjf = new SJF(processnumber);
-		
+			SJF sjf = new SJF(processnumber);	
 			break;
 		case 3:
 			//SJF (Preemptive)
