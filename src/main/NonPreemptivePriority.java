@@ -4,16 +4,15 @@ import java.util.*;
 import java.util.Scanner;
 
 public class NonpreemptivePriority {
-	private static Process[]process;
+	private static List<Process> process= new ArrayList<Process>();
 	private int processnumber;
 	private int totalWaitTime;
 	private int totalTurnaroundTime;
 	
 	public NonpreemptivePriority(int n) {
-		process = new Process[n];
 		createNonpreemptivePriority(n);
 		processnumber = n;
-    NonpreemptivePriorityProcess();
+		NonpreemptivePriorityProcess();
 	}
 	
 	private void NonpreemptivePriorityProcess() {
@@ -30,33 +29,28 @@ public class NonpreemptivePriority {
 	private static void createNonpreemptivePriority(int num) {
 		for (int i = 0; i < num; i++) {
 			int[] bArray = { (int) (Math.random() * 60 + 1) };
-			process[i] = new Process(i, bArray);
+			process.add(new Process(i, bArray));
 		}
 	}
 	
 	public void setNonpreemptivePriority() {
-		int[]priority = null;
-		int length = process.length;
+		
+		int size = process.size();
+		int[]priority = new int[size];
 		System.out.println("");
-		System.out.println("Enter the priority for process");
+		System.out.println("Enter the priority for process(start with zero)");
 		Scanner scan=new Scanner(System.in);
-		for(int i=0;i<length;i++) {
+		for(int i=0;i<size;i++) {
 			priority[i]=scan.nextInt();
 		}
 		scan.close();
 		
-		Process[]temp = process;
-		int t=priority[0];
-		for(int k=0;k<length;k++) {
-			for(int j=0;j<length;j++) {
-				if(temp[k]==temp[t]) {
-					process[k]=temp[k];
-				}
-				else {
-					t=priority[j];
-				}
-			}
+		List<Process> comp= new ArrayList<Process>();
+		for(int i=0;i<size;i++) {
+			Process temp1=process.get(priority[i]);
+			comp.add(temp1);
 		}
+		process = comp;
 		
 	}
 	
@@ -67,10 +61,10 @@ public class NonpreemptivePriority {
 			temp = 0;
 			if(i != 0) {
 				for (int j = i-1; j >= 0; j--) {
-					temp += process[j].getCPUBurstList()[0];		
+					temp += process.get(i).getCPUBurstList()[0];		
 				}
 			}
-			process[i].setWaitTime(temp);
+			process.get(i).setWaitTime(temp);
 			totalWaitTime += temp;
 		}
 	}
@@ -81,22 +75,22 @@ public class NonpreemptivePriority {
 		for (int i = 0; i < processnumber; i++) {
 			temp = 0;
 			for (int j = i; j >= 0; j--) {
-				temp += process[j].getCPUBurstList()[0];
+				temp += process.get(j).getCPUBurstList()[0];
 			}
-			process[i].setFinishTime(temp);
-			int turnAroundT = temp - process[i].getStartTime();
-			process[i].setTurnAroundTime(turnAroundT);
+			process.get(i).setFinishTime(temp);
+			int turnAroundT = temp - process.get(i).getStartTime();
+			process.get(i).setTurnAroundTime(turnAroundT);
 			totalTurnaroundTime += turnAroundT;
 		}
 	}
 	
 	public void println() {
 		for (int i = 0; i < processnumber; i++) {
-			System.out.println("ID: " + process[i].getPid() + 
-					" Brust: " + process[i].getCPUBurstList()[0] + 
-					" WaitTime: " + process[i].getWaitTime() +
+			System.out.println("ID: " + process.get(i).getPid() + 
+					" Brust: " + process.get(i).getCPUBurstList()[0] + 
+					" WaitTime: " + process.get(i).getWaitTime() +
 					" TurnAroundTime: " + 
-					(process[i].getFinishTime() - process[i].getStartTime())
+					(process.get(i).getFinishTime() - process.get(i).getStartTime())
 					);
 		}
 		
