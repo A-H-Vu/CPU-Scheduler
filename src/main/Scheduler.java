@@ -1,6 +1,6 @@
 package main;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class Scheduler {
 	//create new scanner
@@ -12,16 +12,39 @@ public class Scheduler {
 	public static void main(String[] args) {
 		//program start, print welcome message
 		printWelcome();
-		processnumber = s.nextInt();
-
+		//check player input
+		boolean finish = false;
+		while(!finish) {
+		    try{
+		    	processnumber = Integer.parseInt(s.nextLine());
+		    	if(processnumber <= 0 || processnumber > 2147483647)
+		    		throw new NumberFormatException() ;
+		    	finish = true;
+		    }catch (NumberFormatException e){
+		        System.out.println("Invalid input! You have to enter a positive integer!");
+		    }
+		}
+ 
 		
 		//print all the algorithm, then select One of the Algorithm and use it 
 		printSelection();
-		int SdSelection = s.nextInt();	
-	
-		//create different process and run
-		selectAlgorithem(SdSelection);
+		//check player input
+		finish = false;
+		int SdSelection = 0;	
+		while(!finish) {
+		    try{
+		    	SdSelection = Integer.parseInt(s.nextLine());
+		    	if(SdSelection <= 0 || processnumber > 6)
+		    		throw new NumberFormatException() ;
+		    	finish = true;
+		    }catch (NumberFormatException e){
+		        System.out.println("Invalid input! You have to enter 1 to 6!");
+		    }
+		}
 		
+		
+		//create different process and run
+		selectAlgorithem(SdSelection);	
 		s.close();
 	
 	}
@@ -61,7 +84,7 @@ public class Scheduler {
 		System.out.println("============Welcome to CPU Scheduler!============");
 		System.out.println("Before you pick which one of the CPU scheduler,");
 		System.out.println("you will need to choose the size of the processed data");
-		System.out.println("Please enter the integer number now: ");
+		System.out.println("Please enter a positive integer number now: ");
 	}
 	
 	//print selection message
