@@ -1,0 +1,25 @@
+ID: 0 Brust: 60 WaitTime: 0 TurnAroundTime: 60
+ID: 1 Brust: 50 WaitTime: 60 TurnAroundTime: 110
+ID: 2 Brust: 8 WaitTime: 110 TurnAroundTime: 118
+ID: 3 Brust: 9 WaitTime: 118 TurnAroundTime: 127
+ID: 4 Brust: 39 WaitTime: 127 TurnAroundTime: 166
+ID: 5 Brust: 12 WaitTime: 166 TurnAroundTime: 178
+ID: 6 Brust: 45 WaitTime: 178 TurnAroundTime: 223
+ID: 7 Brust: 12 WaitTime: 223 TurnAroundTime: 235
+ID: 8 Brust: 41 WaitTime: 235 TurnAroundTime: 276
+ID: 9 Brust: 15 WaitTime: 276 TurnAroundTime: 291
+Average waiting time = 149.300000 
+Average turn around time = 178.400000 
+===============After SJF(NP) Sort===============
+ID: 2 Brust: 8 WaitTime: 0 TurnAroundTime: 8
+ID: 3 Brust: 9 WaitTime: 8 TurnAroundTime: 17
+ID: 5 Brust: 12 WaitTime: 17 TurnAroundTime: 29
+ID: 7 Brust: 12 WaitTime: 29 TurnAroundTime: 41
+ID: 9 Brust: 15 WaitTime: 41 TurnAroundTime: 56
+ID: 4 Brust: 39 WaitTime: 56 TurnAroundTime: 95
+ID: 8 Brust: 41 WaitTime: 95 TurnAroundTime: 136
+ID: 6 Brust: 45 WaitTime: 136 TurnAroundTime: 181
+ID: 1 Brust: 50 WaitTime: 181 TurnAroundTime: 231
+ID: 0 Brust: 60 WaitTime: 231 TurnAroundTime: 291
+Average waiting time = 79.400000 
+Average turn around time = 108.500000 
