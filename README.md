@@ -1,6 +1,14 @@
 # CPU-Scheduler
 
 
+**For the FCFS(Non-Preemptive)**
+
+Run class "Scheduler" and follow what is printed on the console.
+
+
+First option is to choose the data size by typing a positive integer.
+Then choose the first algorithm to be used for the cpu algorithm by typing '1'.
+
 **For the SJF(Noun-Preemptive)**
 
 Run class "Scheduler", follow what is printed on the consule.
