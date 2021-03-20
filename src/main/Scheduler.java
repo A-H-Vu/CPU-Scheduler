@@ -41,6 +41,7 @@ public class Scheduler {
 			break;
 		case 4:
 			//Priority (NonPreemptive)
+			NonpreemptivePriority NP = new NonpreemptivePriority(processnumber);
 			break;
 		case 5:
 			//Priority (Preemptive)
