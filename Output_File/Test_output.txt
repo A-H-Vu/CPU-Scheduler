@@ -1,0 +1,12 @@
+
+Scheduling algorithm: Nonpreemptive Priority Scheduling
+average waiting time: 3.0
+average turnaround time: 11.666666666666666
+
+Scheduling algorithm: Preemptive Priority Scheduling
+average waiting time: 4.0
+average turnaround time: 13.666666666666666
+
+Scheduling algorithm: Preemptive Round-Robin Scheduling
+average waiting time: 3.6666666666666665
+average turnaround time: 11.666666666666666
