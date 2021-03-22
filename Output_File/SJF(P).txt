@@ -1,0 +1,25 @@
+ID: 0 Brust: 57 WaitTime: 0 TurnAroundTime: 57
+ID: 1 Brust: 55 WaitTime: 57 TurnAroundTime: 112
+ID: 2 Brust: 52 WaitTime: 112 TurnAroundTime: 164
+ID: 3 Brust: 17 WaitTime: 164 TurnAroundTime: 181
+ID: 4 Brust: 50 WaitTime: 181 TurnAroundTime: 231
+ID: 5 Brust: 6 WaitTime: 231 TurnAroundTime: 237
+ID: 6 Brust: 11 WaitTime: 237 TurnAroundTime: 248
+ID: 7 Brust: 13 WaitTime: 248 TurnAroundTime: 261
+ID: 8 Brust: 22 WaitTime: 261 TurnAroundTime: 283
+ID: 9 Brust: 19 WaitTime: 283 TurnAroundTime: 302
+Average waiting time = 177.400000 
+Average turn around time = 207.600000 
+===============After NonpreemptivePriority Sort===============
+ID: 5 Brust: 6 WaitTime: 0 TurnAroundTime: 237
+ID: 6 Brust: 11 WaitTime: 6 TurnAroundTime: 248
+ID: 7 Brust: 13 WaitTime: 17 TurnAroundTime: 261
+ID: 3 Brust: 17 WaitTime: 30 TurnAroundTime: 181
+ID: 9 Brust: 19 WaitTime: 47 TurnAroundTime: 302
+ID: 8 Brust: 22 WaitTime: 66 TurnAroundTime: 283
+ID: 4 Brust: 50 WaitTime: 88 TurnAroundTime: 231
+ID: 2 Brust: 52 WaitTime: 138 TurnAroundTime: 164
+ID: 1 Brust: 55 WaitTime: 190 TurnAroundTime: 112
+ID: 0 Brust: 57 WaitTime: 245 TurnAroundTime: 57
+Average waiting time = 82.700000 
+Average turn around time = 112.900000 

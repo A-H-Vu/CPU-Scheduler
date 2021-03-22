@@ -62,6 +62,7 @@ public class Scheduler {
 			break;
 		case 3:
 			//SJF (Preemptive)
+			PreemptiveSJF sjfp = new PreemptiveSJF(processnumber);
 			break;
 		case 4:
 			//Priority (NonPreemptive)

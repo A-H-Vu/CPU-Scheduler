@@ -20,6 +20,8 @@ public class PreemptiveSJF {
 		finishTime();
 		println();
 		System.out.println("===============After NonpreemptivePriority Sort===============");
+			totalWaitTime = 0;
+			totalTurnaroundTime = 0;
 		sort();
 		PreemptivewaitTime();
 		PreemptivefinishTime();
